@@ -1,1 +1,1 @@
-web: java -jar target/Soprano-1.0-SNAPSHOT-jar-with-dependencies.jar
+worker: java -jar target/Soprano-1.0-SNAPSHOT-jar-with-dependencies.jar
