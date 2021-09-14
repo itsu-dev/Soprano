@@ -23,7 +23,7 @@ object Bot {
 
     init {
         try {
-            TOKEN = File("token.txt").bufferedReader(StandardCharsets.UTF_8).readText()
+            TOKEN = System.getenv("discordToken") ?: File("token.txt").bufferedReader(StandardCharsets.UTF_8).readText()
         } catch (e: IOException) {
             error("token.txt is not found.")
             exitProcess(1)
