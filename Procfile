@@ -1,0 +1,1 @@
+web: java -jar Soprano-1.0-SNAPSHOT.jar
