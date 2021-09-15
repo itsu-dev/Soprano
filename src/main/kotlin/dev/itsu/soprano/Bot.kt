@@ -18,14 +18,14 @@ object Bot {
     private val jda: JDA
 
     private var TOKEN = ""
-    const val VERSION = "1.0.0 alpha"
+    const val VERSION = "1.1.0 alpha"
     const val PREFIX = "!"
 
     init {
         try {
             TOKEN = System.getenv("discordToken") ?: File("token.txt").bufferedReader(StandardCharsets.UTF_8).readText()
         } catch (e: IOException) {
-            error("token.txt is not found.")
+            error("Token not found.")
             exitProcess(1)
         }
 

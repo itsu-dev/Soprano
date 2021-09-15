@@ -8,12 +8,12 @@ class PlayCommand : ICommand {
 
     override fun processCommand(label: String, args: Array<String>, event: MessageReceivedEvent) {
         if (args.isEmpty()) {
-            event.message.reply("**YouTubeのURLを入力してください！**").queue()
+            event.message.reply("❌  **YouTubeのURLを入力してください！**").queue()
             return
         }
 
         val voiceChannel = MessagingUtils.getAuthorsVoiceChannel(event) ?: run {
-            event.message.reply("**このコマンドを実行するにはボイスチャンネルに参加している必要があります！**").queue()
+            event.message.reply("❌  **このコマンドを実行するにはボイスチャンネルに参加している必要があります！**").queue()
             return
         }
 

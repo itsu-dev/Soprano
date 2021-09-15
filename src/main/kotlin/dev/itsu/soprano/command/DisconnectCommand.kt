@@ -9,4 +9,5 @@ class DisconnectCommand : ICommand {
         AudioManager.disconnectVoiceChannel(event.guild.audioManager)
         event.message.reply("またね！").queue()
     }
+
 }

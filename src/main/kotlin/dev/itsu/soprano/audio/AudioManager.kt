@@ -53,7 +53,7 @@ object AudioManager {
         val audioManager = getGuildAudioManager(message.guild)
         playerManager.loadItemOrdered(audioManager, trackURL, object : AudioLoadResultHandler {
             override fun trackLoaded(track: AudioTrack) {
-                message.reply("キューに追加しました：${track.info.title}（YouTube）").queue()
+                message.reply("▶  キューに追加しました：${track.info.title}（YouTube）").queue()
                 play(message.guild, voiceChannel, track)
             }
 
@@ -61,16 +61,16 @@ object AudioManager {
                 val firstTrack = playlist.selectedTrack ?: run {
                     playlist.tracks[0]
                 }
-                message.reply("キューに追加しました：${firstTrack.info.title}（YouTube）").queue()
+                message.reply("▶  キューに追加しました：${firstTrack.info.title}（YouTube）").queue()
                 play(message.guild, voiceChannel, firstTrack)
             }
 
             override fun noMatches() {
-                message.reply("**${trackURL}に該当する動画が見つかりませんでした。**").queue()
+                message.reply("❌  **${trackURL}に該当する動画が見つかりませんでした。**").queue()
             }
 
             override fun loadFailed(exception: FriendlyException) {
-                message.reply("**エラーが発生しました。（${exception.message}）**").queue()
+                message.reply("❌  **エラーが発生しました。（${exception.message}）**").queue()
             }
         })
     }
@@ -82,7 +82,7 @@ object AudioManager {
 
     fun skip(message: Message) {
         getGuildAudioManager(message.guild).trackScheduler.next()
-        message.reply("スキップしました。").queue()
+        message.reply("⏭  スキップしました。").queue()
     }
 
     private fun connectToVoiceChannel(voiceChannel: VoiceChannel, audioManager: AudioManager) {

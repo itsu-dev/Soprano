@@ -12,13 +12,14 @@ class CommandListener : ListenerAdapter() {
     init {
         addCommand("play:p", PlayCommand::class.java)
         addCommand("loop", LoopCommand::class.java)
-        addCommand("ver", VersionCommand::class.java)
+        addCommand("version:ver", VersionCommand::class.java)
         addCommand("skip:s", SkipCommand::class.java)
         addCommand("help:h", HelpCommand::class.java)
         addCommand("ping", PingCommand::class.java)
         addCommand("disconnect:dc", DisconnectCommand::class.java)
         addCommand("pause", PauseCommand::class.java)
         addCommand("resume", ResumeCommand::class.java)
+        addCommand("nowplaying:np", NowPlayingCommand::class.java)
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
