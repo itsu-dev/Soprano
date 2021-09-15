@@ -15,7 +15,8 @@ object MessagingUtils {
     }
 
     fun getAuthorsVoiceChannel(event: MessageReceivedEvent): VoiceChannel? {
-        return event.guild.voiceChannels.firstOrNull()
+        val member = event.guild.getMember(event.author) ?: return event.guild.voiceChannels.firstOrNull()
+        return event.guild.voiceChannels.firstOrNull { it.members.firstOrNull { it.id == member.id } != null }
     }
 
 }

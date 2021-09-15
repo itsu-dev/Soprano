@@ -18,7 +18,7 @@ object Bot {
     private val jda: JDA
 
     private var TOKEN = ""
-    const val VERSION = "1.1.0 alpha"
+    const val VERSION = "1.1.1 alpha"
     const val PREFIX = "!"
 
     init {
@@ -32,7 +32,6 @@ object Bot {
         jda = JDABuilder.createDefault(TOKEN)
             .setActivity(Activity.of(Activity.ActivityType.DEFAULT, "るん♪"))
             .setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER))
-            .disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE)
             .disableCache(CacheFlag.ACTIVITY)
             .disableIntents(GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_TYPING)
             .setChunkingFilter(ChunkingFilter.NONE)

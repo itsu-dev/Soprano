@@ -26,7 +26,7 @@ class CommandListener : ListenerAdapter() {
         val message = event.message
 
         if (message.author.isBot) {
-            message.reply("**Botがこのコマンドをすることはできません。**")
+            message.reply("❌  **Botがこのコマンドをすることはできません。**")
             return
         }
 
@@ -44,6 +44,8 @@ class CommandListener : ListenerAdapter() {
                         split.slice(IntRange(1, split.size - 1)).toTypedArray(),
                         event
                     )
+            } else {
+                event.message.reply("😵  **未実装のコマンドです。**").queue()
             }
         }
     }
