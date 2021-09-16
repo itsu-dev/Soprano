@@ -22,6 +22,7 @@ class HelpCommand : ICommand {
             **${Bot.PREFIX}disconnect[dc]** ボイスチャンネルから退出します。
             **${Bot.PREFIX}queue[q]** 現在のキューを表示します。
             **${Bot.PREFIX}shuffle** キューをシャッフルします。
+            **${Bot.PREFIX}clear** キューをリセットします。
             **${Bot.PREFIX}help[h]** ヘルプを表示します。
             **${Bot.PREFIX}version[ver]** バージョン情報を表示します。
             **${Bot.PREFIX}ping** Ping値を表示します。
