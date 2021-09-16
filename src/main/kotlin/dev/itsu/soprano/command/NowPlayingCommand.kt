@@ -1,5 +1,6 @@
 package dev.itsu.soprano.command
 
+import dev.itsu.soprano.MessagingUtils
 import dev.itsu.soprano.audio.AudioManager
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import java.text.SimpleDateFormat
@@ -13,18 +14,9 @@ class NowPlayingCommand : ICommand {
             return
         }
 
-        val format = SimpleDateFormat("H:mm:ss")
-        format.timeZone = TimeZone.getTimeZone("UTC")
-
-        var str = format.format(Date(info.length))
-        if (str.startsWith("0:")) {
-            val split = str.split(":")
-            str = split[1] + ":" + split[2]
-        }
-
         event.message.reply("""
             🎵  **${info.title}** 
-            ${info.author}（$str）
+            ${info.author}（${MessagingUtils.timeToString(info.length)}）
             ${info.uri}
         """.trimIndent()).queue()
     }

@@ -11,7 +11,7 @@ class CommandListener : ListenerAdapter() {
 
     init {
         addCommand("play:p", PlayCommand::class.java)
-        addCommand("loop", LoopCommand::class.java)
+        // addCommand("loop", LoopCommand::class.java)
         addCommand("version:ver", VersionCommand::class.java)
         addCommand("skip:s", SkipCommand::class.java)
         addCommand("help:h", HelpCommand::class.java)
@@ -20,6 +20,10 @@ class CommandListener : ListenerAdapter() {
         addCommand("pause", PauseCommand::class.java)
         addCommand("resume", ResumeCommand::class.java)
         addCommand("nowplaying:np", NowPlayingCommand::class.java)
+        addCommand("seek", SeekCommand::class.java)
+        addCommand("forward:fwd", ForwardCommand::class.java)
+        addCommand("rewind:rwd", RewindCommand::class.java)
+        addCommand("replay", ReplayCommand::class.java)
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
@@ -33,7 +37,7 @@ class CommandListener : ListenerAdapter() {
         if (message.contentRaw.startsWith(Bot.PREFIX)) {
             val split = message.contentRaw.split(" ")
             val label = split[0].substring(1).lowercase()
-            val key = commands.keys.firstOrNull { it.contains(label) }
+            val key = commands.keys.firstOrNull { it.split(":").firstOrNull { it == label } != null }
             if (key != null) {
                 commands[key]
                     ?.asSubclass(ICommand::class.java)

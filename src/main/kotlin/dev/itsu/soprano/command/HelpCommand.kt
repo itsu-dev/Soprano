@@ -13,10 +13,14 @@ class HelpCommand : ICommand {
             **${Bot.PREFIX}skip[s]** スキップ
             **${Bot.PREFIX}pause** ポーズ
             **${Bot.PREFIX}resume** 再生
+            **${Bot.PREFIX}seek <TIME>** TIMEで指定した時間から曲を再生します。
+            **${Bot.PREFIX}forward[fwd] <TIME>** TIMEで指定した時間だけスキップします。
+            **${Bot.PREFIX}rewind[rwd] <TIME>** TIMEで指定した時間だけ戻ります。
+            **${Bot.PREFIX}replay** 再生中の曲を初めから再生します。
             **${Bot.PREFIX}nowplaying[np]** 再生中の曲の情報を表示します。
             **${Bot.PREFIX}disconnect[dc]** ボイスチャンネルから退出します。
             **${Bot.PREFIX}help[h]** ヘルプを表示します。
-            **${Bot.PREFIX}version:ver** バージョン情報を表示します。
+            **${Bot.PREFIX}version[ver]** バージョン情報を表示します。
             **${Bot.PREFIX}ping** Ping値を表示します。
         """.trimIndent()).queue()
     }

@@ -9,6 +9,7 @@ import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
+import dev.itsu.soprano.MessagingUtils
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.VoiceChannel
@@ -83,6 +84,40 @@ object AudioManager {
     fun skip(message: Message) {
         getGuildAudioManager(message.guild).trackScheduler.next()
         message.reply("⏭  スキップしました。").queue()
+    }
+
+    fun seek(message: Message, position: Long) {
+        val audioManager = getGuildAudioManager(message.guild)
+        val track = audioManager.getSendHandler().audioPlayer.playingTrack
+        if (track.isSeekable) {
+            if (position !in 0..track.info.length) {
+                message.reply("❌  **曲の再生時間の範囲内で指定する必要があります（0:00~${MessagingUtils.timeToString(track.info.length)}）**")
+                    .queue()
+                return
+            }
+            audioManager.getSendHandler().audioPlayer.playingTrack.position = position
+            message.reply("🎼  ${MessagingUtils.timeToString(position)}へ移動しました。").queue()
+            return
+        }
+        message.reply("❌  **再生中の曲はこの機能に対応しておりません。**").queue()
+    }
+
+    fun forward(message: Message, delta: Long) {
+        val audioManager = getGuildAudioManager(message.guild)
+        val track = audioManager.getSendHandler().audioPlayer.playingTrack
+        val time =
+            if (track.position + delta !in 0..track.info.length + delta) track.info.length
+            else track.position + delta
+        seek(message, time)
+    }
+
+    fun rewind(message: Message, delta: Long) {
+        val audioManager = getGuildAudioManager(message.guild)
+        val track = audioManager.getSendHandler().audioPlayer.playingTrack
+        val time =
+            if (track.position - delta !in 0..track.info.length) 0
+            else track.position - delta
+        seek(message, time)
     }
 
     private fun connectToVoiceChannel(voiceChannel: VoiceChannel, audioManager: AudioManager) {
