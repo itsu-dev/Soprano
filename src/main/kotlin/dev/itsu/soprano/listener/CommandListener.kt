@@ -25,6 +25,8 @@ class CommandListener : ListenerAdapter() {
         addCommand("rewind:rwd", RewindCommand::class.java)
         addCommand("replay", ReplayCommand::class.java)
         addCommand("summon", SummonCommand::class.java)
+        addCommand("queue:q", QueueCommand::class.java)
+        addCommand("shuffle", ShuffleCommand::class.java)
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {

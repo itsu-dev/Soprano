@@ -20,6 +20,8 @@ class HelpCommand : ICommand {
             **${Bot.PREFIX}nowplaying[np]** 再生中の曲の情報を表示します。
             **${Bot.PREFIX}summon** 現在参加しているボイスチャンネルにSopranoを呼び出します。
             **${Bot.PREFIX}disconnect[dc]** ボイスチャンネルから退出します。
+            **${Bot.PREFIX}queue[q]** 現在のキューを表示します。
+            **${Bot.PREFIX}shuffle** キューをシャッフルします。
             **${Bot.PREFIX}help[h]** ヘルプを表示します。
             **${Bot.PREFIX}version[ver]** バージョン情報を表示します。
             **${Bot.PREFIX}ping** Ping値を表示します。

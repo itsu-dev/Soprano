@@ -9,7 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue
 
 class TrackScheduler(private val player: AudioPlayer) : AudioEventAdapter() {
 
-    private val queue = LinkedBlockingQueue<AudioTrack>()
+    val queue = LinkedBlockingQueue<AudioTrack>()
 
     fun queue(track: AudioTrack) {
         if (!player.startTrack(track, true)) queue.offer(track)
