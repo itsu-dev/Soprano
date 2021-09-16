@@ -21,7 +21,7 @@ class NowPlayingCommand : ICommand {
                     AudioManager.getGuildAudioManager(event.guild).getSendHandler().audioPlayer.playingTrack.position
                 )
             } / ${MessagingUtils.timeToString(info.length)}
-            ${info.author}（${MessagingUtils.timeToString(info.length)}）
+            👤  ${info.author}
             ${info.uri}
         """.trimIndent()
         ).queue()
