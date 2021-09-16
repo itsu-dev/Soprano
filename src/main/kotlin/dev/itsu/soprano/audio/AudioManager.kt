@@ -120,7 +120,7 @@ object AudioManager {
         seek(message, time)
     }
 
-    private fun connectToVoiceChannel(voiceChannel: VoiceChannel, audioManager: AudioManager) {
+    fun connectToVoiceChannel(voiceChannel: VoiceChannel, audioManager: AudioManager) {
         if (!audioManager.isConnected) audioManager.openAudioConnection(voiceChannel)
     }
 

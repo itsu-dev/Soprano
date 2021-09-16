@@ -30,7 +30,7 @@ object Bot {
         }
 
         jda = JDABuilder.createDefault(TOKEN)
-            .setActivity(Activity.of(Activity.ActivityType.DEFAULT, "るん♪"))
+            .setActivity(Activity.listening("きみの好きな音楽"))
             .setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER))
             .disableCache(CacheFlag.ACTIVITY)
             .disableIntents(GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MESSAGE_TYPING)

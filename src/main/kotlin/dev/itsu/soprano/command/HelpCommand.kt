@@ -18,6 +18,7 @@ class HelpCommand : ICommand {
             **${Bot.PREFIX}rewind[rwd] <TIME>** TIMEで指定した時間だけ戻ります。
             **${Bot.PREFIX}replay** 再生中の曲を初めから再生します。
             **${Bot.PREFIX}nowplaying[np]** 再生中の曲の情報を表示します。
+            **${Bot.PREFIX}summon** 現在参加しているボイスチャンネルにSopranoを呼び出します。
             **${Bot.PREFIX}disconnect[dc]** ボイスチャンネルから退出します。
             **${Bot.PREFIX}help[h]** ヘルプを表示します。
             **${Bot.PREFIX}version[ver]** バージョン情報を表示します。
