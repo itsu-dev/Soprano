@@ -8,7 +8,12 @@ class QueueCommand : ICommand {
 
     override fun processCommand(label: String, args: Array<String>, event: MessageReceivedEvent) {
         val audioManager = AudioManager.getGuildAudioManager(event.guild)
-        var text = "**再生中**：${audioManager.getSendHandler().audioPlayer.playingTrack.info.title}（${
+        if (audioManager.getSendHandler().audioPlayer.playingTrack == null) {
+            event.message.reply("😕  再生中の曲はありません。").queue()
+            return
+        }
+
+        var text = "🎶  **再生中**：${audioManager.getSendHandler().audioPlayer.playingTrack.info.title}（${
             MessagingUtils.timeToString(
                 audioManager.getSendHandler().audioPlayer.playingTrack.position
             ) + " / " +
@@ -21,5 +26,6 @@ class QueueCommand : ICommand {
         }
         event.message.reply(text).queue()
     }
+
 
 }

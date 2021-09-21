@@ -18,7 +18,7 @@ object Bot {
     private val jda: JDA
 
     private var TOKEN = ""
-    const val VERSION = "1.2.1 alpha"
+    const val VERSION = "1.2.2 alpha"
     const val PREFIX = "!"
 
     init {

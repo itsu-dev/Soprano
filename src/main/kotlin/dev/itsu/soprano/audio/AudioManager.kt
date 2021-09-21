@@ -50,11 +50,11 @@ object AudioManager {
         return guildAudioManager
     }
 
-    fun loadAndPlay(message: Message, voiceChannel: VoiceChannel, trackURL: String) {
+    fun loadAndPlay(message: Message, voiceChannel: VoiceChannel, trackURL: String, sendMessage: Boolean = true) {
         val audioManager = getGuildAudioManager(message.guild)
         playerManager.loadItemOrdered(audioManager, trackURL, object : AudioLoadResultHandler {
             override fun trackLoaded(track: AudioTrack) {
-                message.reply("▶  キューに追加しました：${track.info.title}（YouTube）").queue()
+                if (sendMessage) message.reply("▶  キューに追加しました：${track.info.title}（YouTube）").queue()
                 play(message.guild, voiceChannel, track)
             }
 
@@ -62,7 +62,13 @@ object AudioManager {
                 val firstTrack = playlist.selectedTrack ?: run {
                     playlist.tracks[0]
                 }
-                message.reply("▶  キューに追加しました：${firstTrack.info.title}（YouTube）").queue()
+
+                val titles = mutableListOf<String>()
+                playlist.tracks.forEachIndexed { index, value ->
+                    if (index != 0) loadAndPlay(message, voiceChannel, value.info.uri, false)
+                    titles.add(value.info.title)
+                }
+                message.reply("▶  プレイリストをキューに追加しました\n${titles.joinToString("\n")}").queue()
                 play(message.guild, voiceChannel, firstTrack)
             }
 

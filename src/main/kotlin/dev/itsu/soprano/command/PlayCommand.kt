@@ -1,6 +1,5 @@
 package dev.itsu.soprano.command
 
-import com.google.api.services.youtube.YouTube
 import dev.itsu.soprano.MessagingUtils
 import dev.itsu.soprano.audio.AudioManager
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
@@ -17,17 +16,6 @@ class PlayCommand : ICommand {
             event.message.reply("❌  **このコマンドを実行するにはボイスチャンネルに参加している必要があります！**").queue()
             return
         }
-
-        /*
-        val url = args[0]
-        if (url.contains("playlist=")) {
-            val query = YouTube
-
-        } else {
-            AudioManager.loadAndPlay(event.message, voiceChannel, args[0])
-        }
-
-         */
 
         AudioManager.loadAndPlay(event.message, voiceChannel, args[0])
     }
