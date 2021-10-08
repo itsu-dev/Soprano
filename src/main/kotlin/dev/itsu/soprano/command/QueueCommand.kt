@@ -22,6 +22,10 @@ class QueueCommand : ICommand {
             )
         }）\n"
         audioManager.trackScheduler.queue.forEachIndexed { index, track ->
+            if ((text + "**${index + 1}**：${track.info.title}（${MessagingUtils.timeToString(track.info.length)}）\n").length > 2000) {
+                event.message.reply(text).queue()
+                text = ""
+            }
             text += "**${index + 1}**：${track.info.title}（${MessagingUtils.timeToString(track.info.length)}）\n"
         }
         event.message.reply(text).queue()
