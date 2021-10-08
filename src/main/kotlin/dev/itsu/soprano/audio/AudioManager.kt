@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel
 import net.dv8tion.jda.api.managers.AudioManager
 import org.apache.http.client.config.CookieSpecs
 import org.apache.http.client.config.RequestConfig
+import java.util.concurrent.ConcurrentLinkedQueue
 
 object AudioManager {
 
@@ -63,12 +64,10 @@ object AudioManager {
                     playlist.tracks[0]
                 }
 
-                val titles = mutableListOf<String>()
                 playlist.tracks.forEachIndexed { index, value ->
-                    if (index != 0) loadAndPlay(message, voiceChannel, value.info.uri, false)
-                    titles.add(value.info.title)
+                    if (index != 0) audioManager.trackScheduler.queue(value)
                 }
-                message.reply("▶  プレイリストをキューに追加しました\n${titles.joinToString("\n")}").queue()
+                message.reply("▶  プレイリスト: **${playlist.name}**をキューに追加しました").queue()
                 play(message.guild, voiceChannel, firstTrack)
             }
 
