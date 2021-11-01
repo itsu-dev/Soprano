@@ -1,5 +1,7 @@
 package dev.itsu.soprano.audio
 
+import com.sedmelluq.discord.lavaplayer.format.AudioDataFormat
+import com.sedmelluq.discord.lavaplayer.format.StandardAudioDataFormats
 import com.sedmelluq.discord.lavaplayer.player.AudioConfiguration
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
@@ -32,6 +34,8 @@ object AudioManager {
             }
         })
         playerManager.configuration.resamplingQuality = AudioConfiguration.ResamplingQuality.HIGH
+        playerManager.configuration.opusEncodingQuality = AudioConfiguration.OPUS_QUALITY_MAX
+        playerManager.configuration.outputFormat = StandardAudioDataFormats.DISCORD_OPUS
         playerManager.registerSourceManager(HttpAudioSourceManager())
         AudioSourceManagers.registerRemoteSources(playerManager)
     }
@@ -53,6 +57,7 @@ object AudioManager {
 
     fun loadAndPlay(message: Message, voiceChannel: VoiceChannel, trackURL: String, sendMessage: Boolean = true) {
         val audioManager = getGuildAudioManager(message.guild)
+
         playerManager.loadItemOrdered(audioManager, trackURL, object : AudioLoadResultHandler {
             override fun trackLoaded(track: AudioTrack) {
                 if (sendMessage) message.reply("▶  キューに追加しました：${track.info.title}（YouTube）").queue()
@@ -67,6 +72,7 @@ object AudioManager {
                 playlist.tracks.forEachIndexed { index, value ->
                     if (index != 0) audioManager.trackScheduler.queue(value)
                 }
+
                 message.reply("▶  プレイリスト: **${playlist.name}**をキューに追加しました").queue()
                 play(message.guild, voiceChannel, firstTrack)
             }

@@ -13,20 +13,20 @@ class QueueCommand : ICommand {
             return
         }
 
-        var text = "🎶  **再生中**：${audioManager.getSendHandler().audioPlayer.playingTrack.info.title}（${
+        var text = "> \n > 🎶  ${audioManager.getSendHandler().audioPlayer.playingTrack.info.title}（${
             MessagingUtils.timeToString(
                 audioManager.getSendHandler().audioPlayer.playingTrack.position
             ) + " / " +
             MessagingUtils.timeToString(
                 audioManager.getSendHandler().audioPlayer.playingTrack.info.length
             )
-        }）\n"
+        }）\n> \n"
         audioManager.trackScheduler.queue.forEachIndexed { index, track ->
-            if ((text + "**${index + 1}**：${track.info.title}（${MessagingUtils.timeToString(track.info.length)}）\n").length > 2000) {
+            if ((text + "**${index + 1}** `${track.info.title}（${MessagingUtils.timeToString(track.info.length)}）`\n").length > 2000) {
                 event.message.reply(text).queue()
                 text = ""
             }
-            text += "**${index + 1}**：${track.info.title}（${MessagingUtils.timeToString(track.info.length)}）\n"
+            text += "**${index + 1}** `${track.info.title}（${MessagingUtils.timeToString(track.info.length)}）`\n"
         }
         event.message.reply(text).queue()
     }
