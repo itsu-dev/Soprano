@@ -9,7 +9,7 @@ class HelpCommand : ICommand {
         event.message.reply("""
             **🎮  コマンド[エイリアス]** 説明
             --------------------------------------
-            **${Bot.PREFIX}play[p] <URL>** 指定されたYouTubeの音楽をキューに追加します。
+            **${Bot.PREFIX}play[p] <URL|キュー番号>** 指定されたYouTubeの音楽をキューに追加します。キュー番号を指定した場合、番号に対応する曲を再生します。
             **${Bot.PREFIX}skip[s]** スキップ
             **${Bot.PREFIX}pause** ポーズ
             **${Bot.PREFIX}resume** 再生

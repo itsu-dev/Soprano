@@ -1,6 +1,5 @@
 package dev.itsu.soprano.audio
 
-import com.sedmelluq.discord.lavaplayer.format.AudioDataFormat
 import com.sedmelluq.discord.lavaplayer.format.StandardAudioDataFormats
 import com.sedmelluq.discord.lavaplayer.player.AudioConfiguration
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler
@@ -12,13 +11,13 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
 import dev.itsu.soprano.MessagingUtils
+import dev.itsu.soprano.Utils
 import net.dv8tion.jda.api.entities.Guild
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.VoiceChannel
 import net.dv8tion.jda.api.managers.AudioManager
 import org.apache.http.client.config.CookieSpecs
 import org.apache.http.client.config.RequestConfig
-import java.util.concurrent.ConcurrentLinkedQueue
 
 object AudioManager {
 
@@ -83,6 +82,9 @@ object AudioManager {
 
             override fun loadFailed(exception: FriendlyException) {
                 message.reply("❌  **エラーが発生しました。（${exception.message}）**").queue()
+                exception.printStackTrace()
+                Utils.log("CAUGHT AN ERROR WHEN LOADING A MUSIC FROM PLAYLIST. (${trackURL})\n")
+                Utils.log(exception)
             }
         })
     }
