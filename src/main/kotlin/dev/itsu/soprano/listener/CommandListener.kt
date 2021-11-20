@@ -28,6 +28,7 @@ class CommandListener : ListenerAdapter() {
         addCommand("queue:q", QueueCommand::class.java)
         addCommand("shuffle", ShuffleCommand::class.java)
         addCommand("clear", ClearCommand::class.java)
+        addCommand("log:l", LogCommand::class.java)
     }
 
     override fun onMessageReceived(event: MessageReceivedEvent) {
